@@ -4,7 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  background-color: #2c2d30;
+  /* background-color: #2c2d30; */  
+  background-image: url('./assets/bg.png');
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

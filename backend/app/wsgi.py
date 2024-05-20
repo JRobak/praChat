@@ -1,5 +1,5 @@
-from app import create_app
-from lib import db, migrate
+from backend.app import create_app
+from backend.lib import db, migrate
 
 app = create_app(db, migrate)
 
