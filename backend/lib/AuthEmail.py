@@ -6,8 +6,8 @@
 # # Konfiguracja serwera SMTP
 # SMTP_SERVER = 'smtp.gmail.com'
 # SMTP_PORT = 587
-# EMAIL_ADDRESS = 'prachatauth@gmail.com'
-# EMAIL_PASSWORD = '030125#ffc951'
+# EMAIL_ADDRESS = ''
+# EMAIL_PASSWORD = ''
 #
 #
 # def send_email(to_adress, code):
