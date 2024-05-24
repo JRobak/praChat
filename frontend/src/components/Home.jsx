@@ -1,7 +1,13 @@
 export default function Home() {
+
+    function session(){
+      // // localStorage.setItem("name", "test");
+      // console.log(localStorage.getItem("name"));
+    }
+
     return (
       <>
-        home
+        <button onClick={() => session()}>TESTUJ</button>
       </>
     )
   }
