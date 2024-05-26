@@ -10,6 +10,7 @@ def create_app(db, migrate):
     CORS(app)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SECRET_KEY'] = 'test'
 
     db.init_app(app)
     migrate.init_app(app, db)

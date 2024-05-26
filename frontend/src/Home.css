@@ -1,0 +1,141 @@
+/* HOME STYLE */
+html, body, #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden; 
+}
+
+#home-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 50px 200px; 
+    box-sizing: border-box; 
+}
+
+#chat-container {
+    width: 66%;
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+}
+
+#friends-container {
+    width:34%;
+    margin-left: 3%;
+    height: 100%;
+}
+
+#friends-container, #chat-container {
+    border-radius: 15px;
+    background-color: #424769;
+    border: 4px solid #2D3250;
+    /* overflow: hidden;  */
+}
+
+#messages-container {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    border-radius: 8px 8px 0 0;
+}
+
+#input-container {
+    display: flex;
+    padding: 10px;
+    border-radius: 0 0 8px 8px;
+}
+
+#message-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    margin-right: 10px;
+    font-size: 16px;
+    color: #2D3250;
+    background-color: #F6B17A;
+    border: 2px solid #2D3250;
+}
+
+#send-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: #F6B17A;
+    color: #2D3250;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: 2px solid #2D3250;
+}
+
+#send-button:hover {
+    background-color: #e79e64;
+}
+
+/* FRIENDS CONTAINER */
+#friends-container {
+    width: 28%;
+    margin-left: 2%;
+    height: 100%;
+    background-color: #424769;
+    border: 4px solid #2D3250;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+#friends-bottom-box {
+    width: 100%;
+    height: 8%;
+    display: flex;
+    align-items: center;
+    padding: 0px 8px;
+    box-sizing: border-box;
+    background-color: #2D3250;
+    border-radius: 8px;
+}
+
+#friends-bottom-box input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #2D3250;
+    background-color: #F6B17A;
+    border: 2px solid #2D3250;
+}
+
+#friends-bottom-box button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: #F6B17A;
+    color: #2D3250;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: 2px solid #2D3250;
+    margin-right: 10px;
+}
+
+#friends-bottom-box button:hover {
+    background-color: #e79e64;
+}
+
+#your-profile {
+    width: 14%;
+    aspect-ratio: 1 / 1; /* Ensures it remains a square */
+    background-color: #7077A1;
+    border-radius: 50%;
+}
+

@@ -3,3 +3,4 @@ flask-cors
 flask-migrate
 flask-sqlalchemy
 bcrypt
+Flask-SocketIO
