@@ -35,3 +35,37 @@ class Session(db.Model):
 
     def __repr__(self):
         return f'{self.id}. {self.date_of_creation} - {self.date_of_expiration}'
+
+
+class FriendsRelation(db.Model):
+    __tablename__ = 'friends_relation'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user1_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user2_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    date_of_creation = db.Column(db.DateTime)
+
+    def __init__(self, user1_id, user2_id, date_of_creation):
+        self.user1_id = user1_id
+        self.user2_id = user2_id
+        self.date_of_creation = date_of_creation
+
+    def __repr__(self):
+        return f'{self.id}. {self.user1_id} - {self.user2_id}'
+
+
+class Invite(db.Model):
+    __tablename__ = 'invates'
+
+    id = db.Column(db.Integer, primary_key=True)
+    inviter_user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    invitee_user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    date_of_invate = db.Column(db.DateTime)
+
+    def __init__(self, inviter_user_id, invitee_user_id, date_of_invate):
+        self.inviter_user_id = inviter_user_id
+        self.invitee_user_id = invitee_user_id
+        self.date_of_invate = date_of_invate
+
+    def __repr__(self):
+        return f'{self.id}. {self.inviter_user_id} - {self.invitee_user_id}'

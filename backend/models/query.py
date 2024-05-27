@@ -55,7 +55,16 @@ def extend_date_of_session(nr):
     db.session.commit()
 
 
+def check_session_by_number(nr):
+    session = check_exists_number_session(nr)
+    if not session: return None
+    if check_exists_number_session(nr) <= 0: return None
+    return session.user_id
+
+
 def delete_session(nr):
     session = Session.query.filter_by(session_number=nr).first()
     db.session.delete(session)
     db.session.commit()
+
+

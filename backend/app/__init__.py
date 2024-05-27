@@ -15,8 +15,9 @@ def create_app(db, migrate):
     db.init_app(app)
     migrate.init_app(app, db)
 
-    from routes import login, sessions
+    from routes import login, sessions, friend_relation
     app.register_blueprint(login.login_)
     app.register_blueprint(sessions.session_)
+    app.register_blueprint(friend_relation.friend_relation_)
 
     return app

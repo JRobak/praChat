@@ -22,8 +22,9 @@ export default function LoginForm({ setLogin, showPassword, setShowPassword }) {
 
         if (response.ok) {
             // console.log('Success', data);
-            navigate('/');
+            // localStorage.setItem('id', data.user['user_id']);
             document.cookie = "session=" + data.session;
+            navigate('/');
         } else {
             // console.log('Error', data.message);
             setError(data.message);
