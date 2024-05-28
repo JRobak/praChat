@@ -133,9 +133,52 @@ html, body, #root {
 }
 
 #your-profile {
-    width: 14%;
+    height: 80%;
     aspect-ratio: 1 / 1; /* Ensures it remains a square */
     background-color: #7077A1;
     border-radius: 50%;
 }
 
+#friends-list {
+    height: 100%;
+    padding: 8px 10px;
+    color: #F6B17A;
+    overflow: auto ;
+}
+
+.FriendItem {
+    background-color: #2d3250;
+    /* color: #ffc595; */
+    font-size: 20px;
+    padding: 3px 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border-right:3px solid #1d2132;
+    border-bottom:3px solid #1d2132;
+    cursor: pointer;
+}
+
+#friends-list-top-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2D3250;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 24px;
+    font-family: Georgia;
+    font-weight: bold;
+    text-shadow: #00000086 2px 2px 2px;
+    color: #f6b17a;
+    border-bottom: 3px solid #1d2132;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: #424769;
+}
+::-webkit-scrollbar-thumb {
+    background: #1d2132;
+}

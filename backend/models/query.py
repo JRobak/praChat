@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from models.Models import User, Session
+from models.Models import User, Session, FriendsRelation, Invite
 from lib import db
 from lib.hash import hash_password
 
@@ -14,6 +14,11 @@ def add_new_user(username, email, password):
 
 def checking_is_user_exist_by_email(email):
     user = User.query.filter_by(email=email).first()
+    return user if user else None
+
+
+def get_user_by_user_id(id):
+    user = User.query.filter_by(id=id).first()
     return user if user else None
 
 
@@ -58,7 +63,7 @@ def extend_date_of_session(nr):
 def check_session_by_number(nr):
     session = check_exists_number_session(nr)
     if not session: return None
-    if check_exists_number_session(nr) <= 0: return None
+    if check_expiration_date(nr) <= 0: return None
     return session.user_id
 
 
@@ -68,3 +73,39 @@ def delete_session(nr):
     db.session.commit()
 
 
+# FRIENDS RELATIONS
+def get_every_friends_for_user_id(user_id):
+    relations1 = FriendsRelation.query.filter_by(user1_id=user_id).all()
+    relations2 = FriendsRelation.query.filter_by(user2_id=user_id).all()
+
+    friends = []
+    for relation in relations1:
+        friends.append(relation.user2_id)
+    for relation in relations2:
+        friends.append(relation.user1_id)
+    friends = list(set(friends))
+
+    return friends
+
+
+def get_every_invitations_for_user_id(user_id):
+    invitations = Invite.query.filter_by(invitee_user_id=user_id).all()
+    invitations_users_list = []
+    for invitation in invitations:
+        invitations_users_list.append(invitation.inviter_user_id)
+    return invitations_users_list
+
+
+def accept_invitation_by_users_id(user1_id, user2_id):
+    invitation = Invite.query.filter_by(inviter_user_id=user1_id, invitee_user_id=user2_id).first()
+    db.session.delete(invitation)
+    date = datetime.now()
+    friend_relation = FriendsRelation(user1_id, user2_id, date)
+    db.session.add(friend_relation)
+    db.session.commit()
+
+
+def decline_invitation_by_users_id(user1_id, user2_id):
+    invitation = Invite.query.filter_by(inviter_user_id=user1_id, invitee_user_id=user2_id).first()
+    db.session.delete(invitation)
+    db.session.commit()

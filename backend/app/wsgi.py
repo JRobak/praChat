@@ -9,20 +9,22 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 @socketio.on('connect')
 def test_connect():
-    print('Client connected')
+    pass
+    # print('Client connected')
+
 
 @socketio.on('login')
-def login(username):
-    session['username'] = username
+def login(data):
+    user_id = data['id']
+    session['user_id'] = user_id
 
 
 @app.route('/messages', methods=['POST'])
 def messages():
     data = request.get_json()
-    if session.get('username') is None:
+    if session.get('user_id') is None:
         socketio.emit('error', {'message': 'You need to login first', 'type': 'no-login'})
         return jsonify(data)
-    print(data)
     socketio.emit('message', data)
     return jsonify(data)
 

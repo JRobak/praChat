@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function Chat() {
+export default function Chat({socket}) {
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);   
 
@@ -16,15 +16,24 @@ export default function Chat() {
     //     setMessage("");
     //   };
 
+    useEffect(() => {
+        socket.on('message', (newMessage) => {
+            setMessages((prevMessages) => [...prevMessages, newMessage]);
+        });
+
+        return () => {
+            socket.off('message');
+        };
+    }, [socket]);
+
     const sendMessage = () => {
         socket.emit("message", { text: message });
         setMessage("");
-      };
+    };
 
     return (
       <>
         <div id="messages-container">
-          {socket}
           {messages.map((msg, index) => (
             <div key={index} className="message-container">
               <div className="message-text">{msg.text}</div>

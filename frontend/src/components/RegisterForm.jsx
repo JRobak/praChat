@@ -35,10 +35,10 @@ export default function RegisterForm({ setLogin, showPassword, setShowPassword }
     <>
         <h1>Register</h1>
         <form onSubmit={handleSubmit}>
-            <input type="text" name="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
-            <input type="email" name="email" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <input type="text" name="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} maxLength={20}/>
+            <input type="email" name="email" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} maxLength={30}/>
             <div className="password-container">
-                <input type={showPassword ? "text" : "password"} name="password" placeholder="Password" autoComplete="off" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                <input type={showPassword ? "text" : "password"} name="password" placeholder="Password" autoComplete="off" value={password} onChange={(e) => setPassword(e.target.value)} maxLength={30}/>
                 <i onClick={() => setShowPassword(!showPassword)} className={showPassword ? "icon-eye-off" : "icon-eye"}> </i>
             </div>
             {error && <h5 style={{ color: '#d14242', padding: 0, margin: 0, paddingBottom: 10 + "px"}}>{error}</h5>}
