@@ -3,11 +3,12 @@ import FriendItemToList from './FriendItemToList';
 import InvitationItemToList from './InvitationItemToList';
 import { getCookie } from './getCookie.js';
 
-export default function FriendsContainer() {
+export default function FriendsContainer({ userWithCode, setCurrentConversationId }) {
     const [friendsList, setFriendsList] = useState([]);
     const [invitationsList, setInvitationsList] = useState([]);
     const [inputValue, setInputValue] = useState([]);
     const [inputMessage, setInputMessage] = useState('Enter name#444');
+    const [activeUserWithCode, setActiveUserWithCode] = useState(false);
 
     function refreshFriendsList() {
         // console.log('refreshing friends list');
@@ -53,13 +54,15 @@ export default function FriendsContainer() {
                     <InvitationItemToList key={item.id} id={item.id} username={item.username} userCode={item.userCode} refreshFriendsList={refreshFriendsList} />
                 ))}               
                 {friendsList.map(item => (
-                    <FriendItemToList key={item.id} id={item.id} username={item.username} userCode={item.userCode}/>
+                    <FriendItemToList key={item.id} id={item.id} username={item.username} userCode={item.userCode} setCurrentConversationId={ setCurrentConversationId }/>
                 ))}   
             </div>
             <div id="friends-bottom-box">
                 <input type="text" placeholder={inputMessage} value={inputValue} onChange={(e) => setInputValue(e.target.value)}></input>
-                <button onClick={invite}>Add</button>
-                <div id="your-profile"></div>                
+                <button onClick={invite}>Add</button>                
+                <div id="your-profile" onMouseEnter={() => setActiveUserWithCode(true)} onMouseLeave={() => setActiveUserWithCode(false)}>
+                    {activeUserWithCode &&<div id="your-user_with_code" >{ userWithCode }</div>}
+                </div>
             </div>
         </>
     )

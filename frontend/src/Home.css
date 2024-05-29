@@ -137,6 +137,21 @@ html, body, #root {
     aspect-ratio: 1 / 1; /* Ensures it remains a square */
     background-color: #7077A1;
     border-radius: 50%;
+    position: relative;
+}
+
+#your-user_with_code {
+    position: absolute;
+    top: -40px; /* Dostosuj pozycję w zależności od potrzeb */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 2px 5px;
+    background-color: #2d3250;
+    border-radius: 3px;
+    font-size: 22px;
+    white-space: nowrap; 
+    z-index: 1; 
+    color: #F6B17A;
 }
 
 #friends-list {
@@ -155,7 +170,7 @@ html, body, #root {
     border-radius: 10px;
     border-right:3px solid #1d2132;
     border-bottom:3px solid #1d2132;
-    cursor: pointer;
+    
 }
 
 #friends-list-top-box {

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import Conversation from './Conversation';
 
-export default function Chat({socket}) {
+export default function Chat({socket, currentConversationId}) {
     const [message, setMessage] = useState("");
-    const [messages, setMessages] = useState([]);   
+    const [messages, setMessages] = useState([]);
 
     // const sendMessage = () => {
     //     fetch(`http://127.0.0.1:5000/messages`, {
@@ -34,11 +35,12 @@ export default function Chat({socket}) {
     return (
       <>
         <div id="messages-container">
-          {messages.map((msg, index) => (
+          {/* {messages.map((msg, index) => (
             <div key={index} className="message-container">
               <div className="message-text">{msg.text}</div>
             </div>
-          ))}
+          ))} */}
+          <Conversation currentConversationId={ currentConversationId }/>
         </div>
         <div id="input-container">
             <input type="text" id="message-input" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Type your message here..."/>

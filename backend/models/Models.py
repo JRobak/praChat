@@ -61,12 +61,12 @@ class Invite(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     inviter_user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     invitee_user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    date_of_invate = db.Column(db.DateTime)
+    date_of_invite = db.Column(db.DateTime)
 
-    def __init__(self, inviter_user_id, invitee_user_id, date_of_invate):
+    def __init__(self, inviter_user_id, invitee_user_id, date_of_invite):
         self.inviter_user_id = inviter_user_id
         self.invitee_user_id = invitee_user_id
-        self.date_of_invate = date_of_invate
+        self.date_of_invite = date_of_invite
 
     def __repr__(self):
         return f'{self.id}. {self.inviter_user_id} - {self.invitee_user_id}'

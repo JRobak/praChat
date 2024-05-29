@@ -8,7 +8,9 @@ import { getCookie } from './getCookie.js';
 
 export default function Home() {
   const [user, setUser] = useState(null);
+  const [userWithCode, setUserWithCode] = useState(null);
   const [socket, setSocket] = useState(null);
+  const [currentConversationId, setCurrentConversationId] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,6 +35,7 @@ export default function Home() {
           navigate('/login');
         } else {
           setUser(data.user_id);
+          setUserWithCode(data.user_with_code);
           const newSocket = socketIOClient('http://127.0.0.1:5000');
           setSocket(newSocket);
           newSocket.on("connect", () => {
@@ -61,11 +64,10 @@ export default function Home() {
   return (
     <div id="home-container">
       <div id="chat-container">
-        <p style={{paddingLeft:'30px'}}>{user} {getCookie('session')}</p>
-        <Chat socket={socket} />
+        <Chat socket={socket} currentConversationId={ currentConversationId }/>
       </div>
       <div id="friends-container">
-        <FriendsContainer />
+        <FriendsContainer userWithCode={userWithCode} setCurrentConversationId={ setCurrentConversationId }/>
       </div>
     </div>
   );

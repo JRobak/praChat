@@ -4,4 +4,3 @@ flask-migrate
 flask-sqlalchemy
 bcrypt
 Flask-SocketIO
-flask_jwt_extended

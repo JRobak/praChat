@@ -10,7 +10,6 @@ friend_relation_ = Blueprint('friend_relation', __name__)
 @friend_relation_.route('/get_every_friend', methods=['GET'])
 def get_every_friend():
     user_id = check_session_by_number(request.args.get('session'))
-    print(user_id)
     friends = get_every_friends_for_user_id(user_id)
     user_friends = []
     for x in friends:

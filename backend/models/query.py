@@ -141,3 +141,13 @@ def create_new_message(conversation_id, message):
 
 def get_every_messages_for_conversation_id(conversation_id):
     messages = Message.query.filter_by(conversation_id=conversation_id).all()
+
+
+# conversation
+def get_conversation_id_by_users_id(user1_id, user2_id):
+    con1 = FriendsRelation.query.filter_by(user1_id=user1_id, user2_id=user2_id).first()
+    con2 = FriendsRelation.query.filter_by(user1_id=user2_id, user2_id=user1_id).first()
+    if con1:
+        return con1.id
+    if con2:
+        return con2.id
