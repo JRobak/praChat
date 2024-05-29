@@ -15,7 +15,7 @@ export default function LoginForm({ setLogin, showPassword, setShowPassword }) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ email, password }),
         });
 
         const data = await response.json();
@@ -23,7 +23,7 @@ export default function LoginForm({ setLogin, showPassword, setShowPassword }) {
         if (response.ok) {
             // console.log('Success', data);
             // localStorage.setItem('id', data.user['user_id']);
-            document.cookie = "session=" + data.session;
+            document.cookie = "session=" + encodeURIComponent(data.session);
             navigate('/');
         } else {
             // console.log('Error', data.message);

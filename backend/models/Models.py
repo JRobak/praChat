@@ -10,10 +10,11 @@ class User(db.Model):
     email = db.Column(db.String)
     password = db.Column(db.String)
 
-    def __init__(self, username, email, password):
+    def __init__(self, username, email, password, userCode):
         self.username = username
         self.email = email
         self.password = password
+        self.userCode = userCode
 
     def __repr__(self):
         return f"{self.id} {self.username} {self.email} {self.password}"
@@ -69,3 +70,20 @@ class Invite(db.Model):
 
     def __repr__(self):
         return f'{self.id}. {self.inviter_user_id} - {self.invitee_user_id}'
+
+
+class Message(db.Model):
+    __tablename__ = 'messages'
+
+    id = db.Column(db.Integer, primary_key=True)
+    conversation_id = db.Column(db.Integer, db.ForeignKey('friends_relation.id'))
+    message = db.Column(db.String)
+    date_and_hour = db.Column(db.DateTime)
+
+    def __init__(self, conversation_id, message, date_and_hour):
+        self.conversation_id = conversation_id
+        self.date_and_hour = date_and_hour
+        self.message = message
+
+    def __repr__(self):
+        return f'{self.id}. {self.conversation_id} - {self.message} - {self.date_and_hour}'

@@ -1,4 +1,6 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session, g
+from flask_jwt_extended import create_access_token
+
 from models.query import checking_is_user_exist_by_email, add_new_user, create_session
 from lib.hash import verify_password
 
@@ -18,11 +20,13 @@ def login():
         user = checking_is_user_exist_by_email(email)
         if user:
             if verify_password(password, user.password):
-                session = create_session(email)
+                session_nr = create_session(email)
+                access_token = create_access_token(identity=user.id)
                 return jsonify({
                     'message': 'Logged in successfully',
                     'user': {'username': user.username, 'email': user.email},
-                    'session': session
+                    'session': session_nr,
+                    'access_token': access_token
                 }), 200
             else:
                 return jsonify({'message': 'Wrong password', 'user': None}), 401

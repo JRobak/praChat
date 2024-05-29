@@ -4,12 +4,7 @@ import FriendsContainer from './FriendsContainer';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
-
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
+import { getCookie } from './getCookie.js';
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -42,6 +37,7 @@ export default function Home() {
           setSocket(newSocket);
           newSocket.on("connect", () => {
             // console.log("Connected to server");
+            console.log(data.user_id);
             newSocket.emit("login", { id: data.user_id });
           });
         }
@@ -65,6 +61,7 @@ export default function Home() {
   return (
     <div id="home-container">
       <div id="chat-container">
+        <p style={{paddingLeft:'30px'}}>{user} {getCookie('session')}</p>
         <Chat socket={socket} />
       </div>
       <div id="friends-container">

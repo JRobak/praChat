@@ -1,12 +1,22 @@
 from datetime import datetime, timedelta
-from models.Models import User, Session, FriendsRelation, Invite
+from models.Models import User, Session, FriendsRelation, Invite, Message
 from lib import db
 from lib.hash import hash_password
 
 
 # USERS
 def add_new_user(username, email, password):
-    user = User(username, email, hash_password(password))
+    users_with_same_name = User.query.filter_by(username=username).all()
+
+    from lib.creator_userCode import create_user_code, LENGTH
+    code = create_user_code(LENGTH)
+
+    if not users_with_same_name:
+        users_code_with_same_name = [x.userCode for x in users_with_same_name]
+        while code in users_code_with_same_name:
+            code = create_user_code(LENGTH)
+
+    user = User(username, email, hash_password(password), code)
     db.session.add(user)
     db.session.commit()
     return user
@@ -19,6 +29,11 @@ def checking_is_user_exist_by_email(email):
 
 def get_user_by_user_id(id):
     user = User.query.filter_by(id=id).first()
+    return user if user else None
+
+
+def check_username_and_code(username, code):
+    user = User.query.filter_by(username=username, userCode=code).first()
     return user if user else None
 
 
@@ -109,3 +124,20 @@ def decline_invitation_by_users_id(user1_id, user2_id):
     invitation = Invite.query.filter_by(inviter_user_id=user1_id, invitee_user_id=user2_id).first()
     db.session.delete(invitation)
     db.session.commit()
+
+
+def invite_friend_by_users_id(inviter_user_id, invitee_user_id):
+    invitation = Invite(inviter_user_id, invitee_user_id, datetime.now())
+    db.session.add(invitation)
+    db.session.commit()
+
+
+# MESSAGES
+def create_new_message(conversation_id, message):
+    new_message = Message(conversation_id, datetime.now(), message)
+    db.session.add(new_message)
+    db.session.commit()
+
+
+def get_every_messages_for_conversation_id(conversation_id):
+    messages = Message.query.filter_by(conversation_id=conversation_id).all()

@@ -1,4 +1,4 @@
-from flask import request, jsonify, session
+from flask import request, jsonify, session, g
 from app import create_app
 from lib import db, migrate
 from flask_socketio import SocketIO, send
@@ -16,7 +16,7 @@ def test_connect():
 @socketio.on('login')
 def login(data):
     user_id = data['id']
-    session['user_id'] = user_id
+    g.user_id = user_id
 
 
 @app.route('/messages', methods=['POST'])
@@ -33,6 +33,11 @@ def messages():
 def handle_message(message):
     print(f'message: {message} {session["username"]}')
     send(message, broadcast=True)
+
+
+# @app.before_request
+# def before_request():
+#     print(g.user_id)
 
 
 if __name__ == '__main__':

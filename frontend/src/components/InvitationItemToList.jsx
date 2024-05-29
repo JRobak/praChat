@@ -1,22 +1,24 @@
-export default function InvitationItemToList({id, username, userCode, refreshFriendsList}) {
-    function declineInvitaton() {
-        fetch('http://127.0.0.1:5000/decline_invitation', {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({'user_id': id })
-        })
-        .then(response => { response.json(); })
-        .then(data => { refreshFriendsList(); })
-        .catch(error => { console.error('Error:', error); });
-    }
+import { getCookie } from './getCookie.js';
 
+export default function InvitationItemToList({id, username, userCode, refreshFriendsList}) {
     function acceptInvitaton() {
         fetch('http://127.0.0.1:5000/accept_invitation', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({'user_id': id })
+            body: JSON.stringify({'user_id': id, 'session': getCookie('session') })
         })
         .then(response => response.json())        
+        .then(data => { refreshFriendsList(); })
+        .catch(error => { console.error('Error:', error); });
+    }
+
+    function declineInvitaton() {
+        fetch('http://127.0.0.1:5000/decline_invitation', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({'user_id': id, 'session': getCookie('session') })
+        })
+        .then(response => { response.json(); })
         .then(data => { refreshFriendsList(); })
         .catch(error => { console.error('Error:', error); });
     }

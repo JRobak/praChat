@@ -9,6 +9,7 @@ def check_session():
     session_data = request.json
     session_nr = session_data.get('session')
     user_id = check_session_by_number(session_nr)
+    # session['user_id'] = user_id
     if user_id:
         extend_date_of_session(session_nr)
         return jsonify({"user_id": user_id})
