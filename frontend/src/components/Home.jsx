@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
 import { getCookie } from './getCookie.js';
+import duck from '../assets/duck.png';
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -31,7 +32,8 @@ export default function Home() {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.user_id === null || data.user_id === undefined) {
+        if (data.user_id === null || data.user_id === undefined) {          
+          document.cookie = "session=";
           navigate('/login');
         } else {
           setUser(data.user_id);
@@ -63,8 +65,14 @@ export default function Home() {
 
   return (
     <div id="home-container">
-      <div id="chat-container">
-        <Chat socket={socket} currentConversationId={ currentConversationId }/>
+      <div id="chat-container" className={currentConversationId === 0 ? "chat-box-with-gradient" : "chat-box-without-gradient"}>
+        { currentConversationId > 0 && <Chat socket={socket} currentConversationId={ currentConversationId }/> }
+        { currentConversationId === 0 && <>
+              <div id="chat_duck">
+                  <img src={duck} alt="duck"/>
+              </div>
+              <div id="chat_duck_text">Hi, <b>{userWithCode}</b> Welcome to <b>PraChat!</b> To start a conversation select a friend from the list on the right. At the bottom, you can use the form to add a new friend - just make sure to include <b>#&lt;code&gt;</b> after username</div>
+        </> }
       </div>
       <div id="friends-container">
         <FriendsContainer userWithCode={userWithCode} setCurrentConversationId={ setCurrentConversationId }/>

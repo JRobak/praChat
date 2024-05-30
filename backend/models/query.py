@@ -77,9 +77,10 @@ def extend_date_of_session(nr):
 
 def check_session_by_number(nr):
     session = check_exists_number_session(nr)
-    if not session: return None
-    if check_expiration_date(nr) <= 0: return None
-    return session.user_id
+    if session:
+        if check_expiration_date(nr) > 0:
+            return session.user_id
+    return None
 
 
 def delete_session(nr):

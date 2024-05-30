@@ -22,22 +22,14 @@ def login(data):
 @app.route('/messages', methods=['POST'])
 def messages():
     data = request.get_json()
-    if session.get('user_id') is None:
-        socketio.emit('error', {'message': 'You need to login first', 'type': 'no-login'})
-        return jsonify(data)
     socketio.emit('message', data)
     return jsonify(data)
 
 
 @socketio.on('message')
 def handle_message(message):
-    print(f'message: {message} {session["username"]}')
+    print(f'message: {message} ')
     send(message, broadcast=True)
-
-
-# @app.before_request
-# def before_request():
-#     print(g.user_id)
 
 
 if __name__ == '__main__':

@@ -32,9 +32,17 @@ html, body, #root {
 
 #friends-container, #chat-container {
     border-radius: 15px;
-    background-color: #424769;
     border: 4px solid #2D3250;
     /* overflow: hidden;  */
+}
+
+#friends-container, .chat-box-without-gradient {
+    background-color: #424769;
+}
+
+.chat-box-with-gradient {
+    background: rgb(66,71,105);
+    background: radial-gradient(circle, rgba(66,71,105,1) 0%, rgb(60, 64, 94) 50%, rgba(45,50,80,1) 100%);
 }
 
 #messages-container {
@@ -150,7 +158,7 @@ html, body, #root {
     border-radius: 3px;
     font-size: 22px;
     white-space: nowrap; 
-    z-index: 1; 
+    z-index: 1000; 
     color: #F6B17A;
 }
 
@@ -188,6 +196,34 @@ html, body, #root {
     border-bottom: 3px solid #1d2132;
 }
 
+#chat_duck {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    padding: 15px;
+    border-right: 2px solid #e79f64a9;
+    background: linear-gradient(to top left, #1a1c30, #2D3250, #424769);
+}
+
+#chat_duck_text {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    text-align: center;
+    font-size: 24px;
+    /* font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+    font-family: "Zilla Slab", serif;
+    color: #e79f64;
+    text-shadow: #000000b8 2px 2px 2px;
+    margin: 80px 70px;
+    background: linear-gradient(to top ,#20223b, #313657, #424769);    
+}
+
+#chat_duck, #chat_duck_text {
+    border-radius: 70px 70px 5px;
+    border-bottom: 2px solid #e79f64a9;
+}
+
 ::-webkit-scrollbar {
     width: 5px;
 }
@@ -197,3 +233,188 @@ html, body, #root {
 ::-webkit-scrollbar-thumb {
     background: #1d2132;
 }
+
+@media only screen and (max-width: 768px) {
+    #home-container {
+        padding: 10px;
+    }
+
+    #chat-container {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    #friends-container {
+        width: 100%;
+        height: auto;
+        margin-left: 0;
+    }
+
+    #chat_duck {
+        margin: 10px;
+        display: flex;
+        justify-content:center;
+    }
+
+    #chat_duck img {
+        width: 50%;
+    }
+
+    #chat_duck_text {
+        margin: 10px 20px;
+        font-size: 18px;
+    }
+
+    #friends-list-top-box {
+        padding: 5px;
+        font-size: 20px;
+    }
+
+    #friends-list {
+        padding: 5px;
+    }
+
+    .FriendItem {
+        font-size: 16px;
+        margin-top: 5px;
+    }
+
+    #friends-bottom-box {
+        padding: 5px;
+    }
+
+    #your-user_with_code {
+        font-size: 16px;
+    }
+
+    #message-input, #friends-bottom-box input {
+        font-size: 14px;
+    }
+
+    #friends-bottom-box button {
+        font-size: 14px;
+    }
+    
+}
+
+/* Dla ekranów o szerokości od 769px do 1200px */
+@media only screen and (min-width: 769px) and (max-width: 1200px) {
+    #home-container {
+        padding: 30px;
+    }
+
+    #chat-container {
+        width: 60%;
+    }
+
+    #friends-container {
+        width: 38%;
+        margin-left: 2%;
+    }
+
+    #chat_duck {
+        margin-top: 30px;
+        display: flex;
+        justify-content:center;
+    }
+
+    #chat_duck img {
+        width: 80%;
+    }
+
+    #chat_duck_text {
+        margin: 40px 30px;
+        font-size: 20px;
+    }
+
+    #friends-list-top-box {
+        padding: 10px;
+        font-size: 22px;
+    }
+
+    #friends-list {
+        padding: 10px;
+    }
+
+    .FriendItem {
+        font-size: 18px;
+        margin-top: 10px;
+    }
+
+    #friends-bottom-box {
+        padding: 10px;
+    }
+
+    #your-user_with_code {
+        font-size: 20px;
+    }
+
+    #message-input, #friends-bottom-box input {
+        font-size: 16px;
+    }
+
+    #friends-bottom-box button {
+        font-size: 16px;
+    }
+}
+@media only screen and (min-width: 1201px) and (max-width: 1600px) {
+    #home-container {
+        padding: 50px 200px;
+    }
+
+    #chat-container {
+        width: 66%;
+    }
+
+    #friends-container {
+        width: 34%;
+        margin-left: 3%;
+    }
+
+    #chat_duck {
+        margin-top: 50px;
+        display: flex;
+        justify-content:center;
+    }
+
+    #chat_duck img {
+        width: 90%;
+    }
+
+    #chat_duck_text {
+        margin: 80px 70px;
+        font-size: 22px;
+    }
+
+    #friends-list-top-box {
+        padding: 15px;
+        font-size: 24px;
+    }
+
+    #friends-list {
+        padding: 15px;
+    }
+
+    .FriendItem {
+        font-size: 20px;
+        margin-top: 15px;
+    }
+
+    #friends-bottom-box {
+        padding: 15px;
+    }
+
+    #your-user_with_code {
+        font-size: 22px;
+    }
+
+    #message-input, #friends-bottom-box input {
+        font-size: 18px;
+    }
+
+    #friends-bottom-box button {
+        font-size: 18px;
+    }
+}
+

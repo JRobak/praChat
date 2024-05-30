@@ -16,5 +16,5 @@ def check_session():
         extend_date_of_session(session_nr)
         return jsonify({"user_id": user_id, 'user_with_code': user_with_code})
     else:
-        return jsonify({"user_id": None})
+        return jsonify({"user_id": None, 'user_with_code': None})
 

@@ -1,11 +1,28 @@
-import { getCookie } from './getCookie.js';
+import React, { useState, useEffect } from 'react';
 
-export default function Conversation({ currentConversationId }) {
+export default function Conversation({ socket, currentConversationId }) {
+    const [messages, setMessages] = useState([]);
+    
+    useEffect(() => {
+        socket.on('message', (newMessage) => {
+            setMessages((prevMessages) => [...prevMessages, newMessage]);
+        });
+
+        return () => {
+            socket.off('message');
+        };
+    }, [socket]);
+
     return (
         <>
-        {currentConversationId > 0 && <div id="conversation-container">
+        <div id="conversation-container">
             { currentConversationId }
-        </div>}
+            {/* {messages.map((msg, index) => (
+                <div key={index} className="message-container">
+                <div className="message-text">{msg.text}</div>
+                </div>
+            ))} */}
+        </div>
         </>
     )
 }

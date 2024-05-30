@@ -35,7 +35,7 @@ class Session(db.Model):
         self.date_of_expiration = date_of_expiration
 
     def __repr__(self):
-        return f'{self.id}. {self.date_of_creation} - {self.date_of_expiration}'
+        return f'{self.session_number}. {self.date_of_creation} - {self.date_of_expiration}'
 
 
 class FriendsRelation(db.Model):

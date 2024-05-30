@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FriendItemToList from './FriendItemToList';
 import InvitationItemToList from './InvitationItemToList';
 import { getCookie } from './getCookie.js';
+import { useNavigate } from 'react-router-dom';
 
 export default function FriendsContainer({ userWithCode, setCurrentConversationId }) {
     const [friendsList, setFriendsList] = useState([]);
@@ -9,6 +10,7 @@ export default function FriendsContainer({ userWithCode, setCurrentConversationI
     const [inputValue, setInputValue] = useState([]);
     const [inputMessage, setInputMessage] = useState('Enter name#444');
     const [activeUserWithCode, setActiveUserWithCode] = useState(false);
+    const navigate = useNavigate();
 
     function refreshFriendsList() {
         // console.log('refreshing friends list');
@@ -42,6 +44,12 @@ export default function FriendsContainer({ userWithCode, setCurrentConversationI
     useEffect(() => {
         refreshFriendsList();
     }, []);
+
+
+    function logout() {
+        document.cookie = "session=";
+        navigate('/login');
+    }
     
     return (
         <>
@@ -59,8 +67,8 @@ export default function FriendsContainer({ userWithCode, setCurrentConversationI
             </div>
             <div id="friends-bottom-box">
                 <input type="text" placeholder={inputMessage} value={inputValue} onChange={(e) => setInputValue(e.target.value)}></input>
-                <button onClick={invite}>Add</button>                
-                <div id="your-profile" onMouseEnter={() => setActiveUserWithCode(true)} onMouseLeave={() => setActiveUserWithCode(false)}>
+                <button onClick={invite}>Add</button>
+                <div id="your-profile" onMouseEnter={() => setActiveUserWithCode(true)} onMouseLeave={() => setActiveUserWithCode(false)} onClick={() => logout()}>
                     {activeUserWithCode &&<div id="your-user_with_code" >{ userWithCode }</div>}
                 </div>
             </div>
