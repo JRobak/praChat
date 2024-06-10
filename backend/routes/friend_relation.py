@@ -1,14 +1,13 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, g, session
 
-from models.query import get_every_friends_for_user_id, get_user_by_user_id, get_every_invitations_for_user_id, \
-    decline_invitation_by_users_id, accept_invitation_by_users_id, check_username_and_code, invite_friend_by_users_id, \
-    check_session_by_number
+from models.query import get_every_friends_for_user_id, get_user_by_user_id, get_every_invitations_for_user_id, decline_invitation_by_users_id, accept_invitation_by_users_id, check_username_and_code, invite_friend_by_users_id, check_session_by_number
 
 friend_relation_ = Blueprint('friend_relation', __name__)
 
 
 @friend_relation_.route('/get_every_friend', methods=['GET'])
 def get_every_friend():
+    print(session['user_id'])
     user_id = check_session_by_number(request.args.get('session'))
     friends = get_every_friends_for_user_id(user_id)
     user_friends = []

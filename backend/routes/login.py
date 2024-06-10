@@ -21,6 +21,7 @@ def login():
         if user:
             if verify_password(password, user.password):
                 session_nr = create_session(email)
+                session['user_id'] = user.id
                 return jsonify({
                     'message': 'Logged in successfully',
                     'user': {'username': user.username, 'email': user.email},
@@ -58,4 +59,4 @@ def register():
 
 @login_.route("/logout", methods=['GET'])
 def logout():
-    pass
+    return jsonify({"message": "Logged out successfully"}), 200

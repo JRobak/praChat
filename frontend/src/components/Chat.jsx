@@ -5,18 +5,6 @@ import { getCookie } from './getCookie.js';
 export default function Chat({socket, currentConversationId}) {
     const [message, setMessage] = useState("");
 
-    // const sendMessage = () => {
-    //     fetch(`http://127.0.0.1:5000/messages`, {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify({ text: message }),
-    //     });
-    
-    //     setMessage("");
-    //   };
-
     const sendMessage = () => {
         socket.emit("message", { text: message, 'session': getCookie('session'), 'currentConversationId': currentConversationId });
         setMessage("");

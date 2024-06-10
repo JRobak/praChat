@@ -29,34 +29,49 @@ export default function Home() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ session: session }),
+      credentials: 'include', 
     })
       .then(response => response.json())
       .then(data => {
-        if (data.user_id === null || data.user_id === undefined) {          
+        if (!data.user_id) {          
           document.cookie = "session=";
           navigate('/login');
         } else {
           setUser(data.user_id);
           setUserWithCode(data.user_with_code);
-          const newSocket = socketIOClient('http://127.0.0.1:5000');
+
+          const newSocket = socketIOClient('http://127.0.0.1:5000', {
+            transports: ['websocket'], 
+            upgrade: true,
+            reconnection: true,
+            reconnectionAttempts: 5,
+            reconnectionDelay: 1000,
+            timeout: 20000, 
+            withCredentials: true, 
+          });
+          
           setSocket(newSocket);
+
           newSocket.on("connect", () => {
-            // console.log("Connected to server");
-            console.log(data.user_id);
+            console.log(`Connected to server with user ID: ${data.user_id}`);
             newSocket.emit("login", { id: data.user_id });
           });
+
+          newSocket.on("disconnect", (reason) => {
+            if (reason === "io server disconnect") {
+              newSocket.connect();
+            }
+          });
+
+          return () => {
+            newSocket.disconnect();
+          };
         }
       })
       .catch(error => {
         console.error("Error checking session:", error);
         navigate('/login');
       });
-
-    return () => {
-      if (socket) {
-        socket.disconnect();
-      }
-    };
   }, [navigate]);
 
   if (!user || !socket) {
@@ -66,16 +81,18 @@ export default function Home() {
   return (
     <div id="home-container">
       <div id="chat-container" className={currentConversationId === 0 ? "chat-box-with-gradient" : "chat-box-without-gradient"}>
-        { currentConversationId > 0 && <Chat socket={socket} currentConversationId={ currentConversationId }/> }
-        { currentConversationId === 0 && <>
-              <div id="chat_duck">
-                  <img src={duck} alt="duck"/>
-              </div>
-              <div id="chat_duck_text">Hi, <b>{userWithCode}</b> Welcome to <b>PraChat!</b> To start a conversation select a friend from the list on the right. At the bottom, you can use the form to add a new friend - just make sure to include <b>#&lt;code&gt;</b> after username</div>
-        </> }
+        {currentConversationId > 0 && <Chat socket={socket} currentConversationId={currentConversationId} />}
+        {currentConversationId === 0 && (
+          <>
+            <div id="chat_duck">
+              <img src={duck} alt="duck" />
+            </div>
+            <div id="chat_duck_text">Hi, <b>{userWithCode}</b> Welcome to <b>PraChat!</b> To start a conversation select a friend from the list on the right. At the bottom, you can use the form to add a new friend - make sure to include <b>#&lt;code&gt;</b> after username</div>
+          </>
+        )}
       </div>
       <div id="friends-container">
-        <FriendsContainer userWithCode={userWithCode} setCurrentConversationId={ setCurrentConversationId }/>
+        <FriendsContainer userWithCode={userWithCode} setCurrentConversationId={setCurrentConversationId} />
       </div>
     </div>
   );

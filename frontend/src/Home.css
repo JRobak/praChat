@@ -22,6 +22,7 @@ html, body, #root {
     display: flex;
     flex-direction: column;
     height: 100%; 
+    background: radial-gradient(circle, #424769 0%, #333752 100%);
 }
 
 #friends-container {
@@ -32,7 +33,7 @@ html, body, #root {
 
 #friends-container, #chat-container {
     border-radius: 15px;
-    border: 4px solid #2D3250;
+    border: 4px solid #292e48;    
     /* overflow: hidden;  */
 }
 
@@ -41,7 +42,7 @@ html, body, #root {
 }
 
 .chat-box-with-gradient {
-    background: rgb(66,71,105);
+    background: #424769;
     background: radial-gradient(circle, rgba(66,71,105,1) 0%, rgb(60, 64, 94) 50%, rgba(45,50,80,1) 100%);
 }
 
@@ -91,8 +92,8 @@ html, body, #root {
     width: 28%;
     margin-left: 2%;
     height: 100%;
-    background-color: #424769;
-    border: 4px solid #2D3250;
+    /* background-color: #424769; */
+    background: linear-gradient(to left top, #1a1c30, #2D3250, #424769);
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -107,7 +108,7 @@ html, body, #root {
     align-items: center;
     padding: 0px 8px;
     box-sizing: border-box;
-    background-color: #2D3250;
+    background-color: #262b43;
     border-radius: 8px;
 }
 
@@ -150,7 +151,7 @@ html, body, #root {
 
 #your-user_with_code {
     position: absolute;
-    top: -40px; /* Dostosuj pozycję w zależności od potrzeb */
+    top: -40px; 
     left: 50%;
     transform: translateX(-50%);
     padding: 2px 5px;
@@ -358,6 +359,7 @@ html, body, #root {
         font-size: 16px;
     }
 }
+
 @media only screen and (min-width: 1201px) and (max-width: 1600px) {
     #home-container {
         padding: 50px 200px;

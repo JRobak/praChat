@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session
 from models.query import check_session_by_number, extend_date_of_session, get_user_by_user_id
 
 session_ = Blueprint('session', __name__)

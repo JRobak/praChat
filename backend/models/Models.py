@@ -77,11 +77,13 @@ class Message(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     conversation_id = db.Column(db.Integer, db.ForeignKey('friends_relation.id'))
+    who_send_user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     message = db.Column(db.String)
     date_and_hour = db.Column(db.DateTime)
 
-    def __init__(self, conversation_id, message, date_and_hour):
+    def __init__(self, conversation_id, who_send_user_id, message, date_and_hour):
         self.conversation_id = conversation_id
+        self.who_send_user_id = who_send_user_id
         self.date_and_hour = date_and_hour
         self.message = message
 

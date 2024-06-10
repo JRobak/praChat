@@ -47,8 +47,16 @@ export default function FriendsContainer({ userWithCode, setCurrentConversationI
 
 
     function logout() {
-        document.cookie = "session=";
-        navigate('/login');
+        fetch('http://127.0.0.1:5000/logout', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.cookie = "session=";
+            navigate('/login');
+        })
+        .catch(error => { console.error('Error adding entry:', error); });
     }
     
     return (

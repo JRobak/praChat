@@ -152,3 +152,8 @@ def get_conversation_id_by_users_id(user1_id, user2_id):
         return con1.id
     if con2:
         return con2.id
+
+
+def get_conversation_by_id(conversation_id):
+    conv = FriendsRelation.query.filter_by(id=conversation_id).first()
+    return conv if conv else None
