@@ -92,7 +92,7 @@ export default function Home() {
         )}
       </div>
       <div id="friends-container">
-        <FriendsContainer userWithCode={userWithCode} setCurrentConversationId={setCurrentConversationId} />
+        <FriendsContainer userWithCode={userWithCode} setCurrentConversationId={setCurrentConversationId} currentConversationId={currentConversationId} />
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ export default function Conversation({ socket, currentConversationId }) {
 
     function getUsername(currentConversationId)  {
         fetch('http://127.0.0.1:5000/get_users_name_by_conversation_id', {
-            method: 'GET',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({'currentConversationId': currentConversationId, 'session': getCookie('session')}),
         })
@@ -45,14 +45,21 @@ export default function Conversation({ socket, currentConversationId }) {
         };
 
     }, [socket, currentConversationId]);
-    
+
+    useEffect(() => {
+        const chatContainer = document.getElementById('conversation-container');
+        if (chatContainer) {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+    }, [messages]);
+
     return (
         <div id="conversation-container">
-            {username}
+            <h2>{username}</h2>
             {messages.map((msg, index) => (
                 <div key={index} className="message-container">
-                    <div className="message-text">{msg.user}: {msg.message}</div>
-                    {/*<div className="message-date">{new Date(msg.date_and_hour).toLocaleString()}</div>*/}
+                    <div className="message-date">{new Date(msg.date_and_hour).toLocaleString()}</div>
+                    <div className="message-text"><span className={username === msg.user ? "message-user" : null}>{msg.user}:</span> {msg.message}</div>
                 </div>
             ))}
         </div>

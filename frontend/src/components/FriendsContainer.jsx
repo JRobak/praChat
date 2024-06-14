@@ -4,7 +4,7 @@ import InvitationItemToList from './InvitationItemToList';
 import { getCookie } from './getCookie.js';
 import { useNavigate } from 'react-router-dom';
 
-export default function FriendsContainer({ userWithCode, setCurrentConversationId }) {
+export default function FriendsContainer({ userWithCode, setCurrentConversationId, currentConversationId }) {
     const [friendsList, setFriendsList] = useState([]);
     const [invitationsList, setInvitationsList] = useState([]);
     const [inputValue, setInputValue] = useState([]);
@@ -70,7 +70,7 @@ export default function FriendsContainer({ userWithCode, setCurrentConversationI
                     <InvitationItemToList key={item.id} id={item.id} username={item.username} userCode={item.userCode} refreshFriendsList={refreshFriendsList} />
                 ))}               
                 {friendsList.map(item => (
-                    <FriendItemToList key={item.id} id={item.id} username={item.username} userCode={item.userCode} setCurrentConversationId={ setCurrentConversationId }/>
+                    <FriendItemToList key={item.id} id={item.id} username={item.username} userCode={item.userCode} setCurrentConversationId={ setCurrentConversationId } currentConversationId={currentConversationId} />
                 ))}   
             </div>
             <div id="friends-bottom-box">

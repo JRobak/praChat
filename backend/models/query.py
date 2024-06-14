@@ -9,7 +9,7 @@ def add_new_user(username, email, password):
     users_with_same_name = User.query.filter_by(username=username).all()
 
     from lib.creator_userCode import create_user_code, LENGTH
-    code = create_user_code(LENGTH)
+    code = str(create_user_code(LENGTH))
 
     if not users_with_same_name:
         users_code_with_same_name = [x.userCode for x in users_with_same_name]
