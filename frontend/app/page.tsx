@@ -1,17 +1,14 @@
 import Image from "next/image";
-import styles from "./page.module.css";
+import Link from "next/link";
+import React from "react";
 
 export default function Home() {
   return (
-      <main className={styles.main}>
-          <div className={styles.container}>
-              <div className={styles.mainContent}>
-                  <p>Main</p>
-              </div>
-              <div className={styles.nav}>
-                  <p>Nav</p>
-              </div>
-          </div>
+      <main>
+          <h1>Hello World</h1>
+          <Link href="/home">Home</Link> <br/>
+          <Link href="/login">Login</Link> <br/>
+          <Link href="/register">Register</Link> <br/>
       </main>
   );
 }
