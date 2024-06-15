@@ -67,13 +67,14 @@
 
 #login_form .password-container i {
   position: absolute;
-  right: -10%;
-  top: 15%;
+  right: -0.6vw;
+  top: 0.9vh;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  padding: 0 15px;
+  padding: 0 1vw;
   color: #F6B17A;
+  font-size: 1vw;
 }
 
 #login_form input[type="submit"] {
@@ -136,6 +137,10 @@
   }
 
   #login_form p {
+    font-size: 3vw;
+  }
+
+  #login_form .password-container i {
     font-size: 3vw;
   }
 }

@@ -16,10 +16,7 @@ const LoginPage = () => {
                         <img src={'/duck.png'} alt="duck"/>
                     </div>
                     <div id="login_form">
-                        {login === true
-                        ? <LoginInput setLogin={setLogin} />
-                        : <RegisterInput setLogin={setLogin} />
-                    }
+                        {login ? <LoginInput setLogin={setLogin} /> : <RegisterInput setLogin={setLogin} /> }
                     </div>
                 </div>
             </div>
