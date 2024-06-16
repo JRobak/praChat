@@ -16,23 +16,19 @@ const LoginInput: React.FC<LoginInputProps> = ({setLogin}) => {
         e.preventDefault();
         console.log("Form submitted");
 
-        // const response = await fetch('http://127.0.0.1:5000/login', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({ email, password }),
-        // });
-        //
-        // const data = await response.json();
-        // console.log(data);
-        //
-        // if (response.ok) {
-        //     document.cookie = "session=" + encodeURIComponent(data.session);
-        //     navigate('/');
-        // } else {
-        //     setError(data.message);
-        // }
+        const response = await fetch('http://127.0.0.1:5000/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            window.location.href = '/home';
+        } else {
+            setError(data.message);
+        }
     };
 
     return (

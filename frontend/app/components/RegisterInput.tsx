@@ -18,23 +18,19 @@ const RegisterInput: React.FC<RegisterInputProps> = ({setLogin}) => {
         e.preventDefault();
         console.log("Form submitted");
 
-        // const response = await fetch('http://127.0.0.1:5000/login', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({ email, password }),
-        // });
-        //
-        // const data = await response.json();
-        // console.log(data);
-        //
-        // if (response.ok) {
-        //     document.cookie = "session=" + encodeURIComponent(data.session);
-        //     navigate('/');
-        // } else {
-        //     setError(data.message);
-        // }
+        const response = await fetch('http://127.0.0.1:5000/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            window.location.href = '/home';
+        } else {
+            setError(data.message);
+        }
     };
 
     return (
@@ -52,7 +48,7 @@ const RegisterInput: React.FC<RegisterInputProps> = ({setLogin}) => {
                         {error}
                     </h5>
                 )}
-                <input type="submit" value="Login"/>
+                <input type="submit" value="Register"/>
             </form>
             <p> Do you have an account? <a onClick={() => setLogin(true)}>Login</a></p>
         </>
