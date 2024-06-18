@@ -1,6 +1,7 @@
 'use client'
 
 import React, {FormEvent, useState} from 'react'
+import {chatSocket} from "@/api";
 
 interface LoginInputProps {
   setLogin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,21 +15,11 @@ const LoginInput: React.FC<LoginInputProps> = ({setLogin}) => {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        console.log("Form submitted");
 
-        const response = await fetch('http://127.0.0.1:5000/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            window.location.href = '/home';
-        } else {
-            setError(data.message);
-        }
+        chatSocket.emit('login', {email, password});
+        
+        //     // on login
+        //     window.location.href = '/home';
     };
 
     return (
